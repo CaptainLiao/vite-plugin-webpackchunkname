@@ -115,32 +115,36 @@ function appModuleId2chunkNamesMap(
   }
   return depMaps
 }
+
 function getImportersChunkNames(
   id: string,
   getModuleInfo: GetModuleInfo,
   depMaps: moduleImpoterMap
 ): Set<string> {
-  const info = depMaps[id]
-  if (info) return info.chunkNames
-
-  const { importers, isEntry } = getModuleInfo(id)
-  if (isEntry) return new Set([bundleName.main])
-  if (importers.length === 0) {
-    const names = new Set([getDynamicModuleName(id)])
-    depMaps[id] = {
-      chunkNames: new Set(names),
-    }
-    return names
-  }
-
+  const ids = [id]
   const resSets = new Set<string>()
-  for (const sid of importers) {
-    getImportersChunkNames(sid, getModuleInfo, depMaps).forEach((name) =>
-      resSets.add(name)
-    )
+  for (const sid of ids) {
+    const info = depMaps[sid]
+    if (info) {
+      info.chunkNames.forEach((item) => resSets.add(item))
+    } else {
+      const { isEntry, importers } = getModuleInfo(sid)
+      if (isEntry) {
+        resSets.add(bundleName.main)
+      } else if (importers.length === 0) {
+        const name = getDynamicModuleName(sid)
+        depMaps[sid] = {
+          chunkNames: new Set([name]),
+        }
+        resSets.add(name)
+      } else {
+        importers.forEach((item) => ids.push(item))
+      }
+    }
   }
   return resSets
 }
+
 const dynamicNameCache = new Map<string, number>()
 function getDynamicModuleName(moduleId: string): string {
   const chunkNameRes = chunkNameRE.exec(moduleId)
