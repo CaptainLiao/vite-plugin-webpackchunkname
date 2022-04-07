@@ -103,9 +103,19 @@ export const manualChunksPlugin = function (): Plugin {
       if (!userConfig.build.rollupOptions) userConfig.build.rollupOptions = {}
       if (!userConfig.build.rollupOptions.output)
         userConfig.build.rollupOptions.output = {}
-      Object.assign(userConfig.build.rollupOptions.output, {
-        manualChunks: manualChunksConfig,
-      })
+
+      const rollupOptions = userConfig.build.rollupOptions
+      const output = rollupOptions.output
+      if (Array.isArray(output)) {
+        rollupOptions.output = output.map((item) => {
+          item.manualChunks = manualChunksConfig
+          return item
+        })
+      } else {
+        Object.assign(userConfig.build.rollupOptions.output, {
+          manualChunks: manualChunksConfig,
+        })
+      }
     },
   }
 }
