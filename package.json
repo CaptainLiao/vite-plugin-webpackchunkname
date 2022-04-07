@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-webpackchunkname",
-  "version": "0.0.2",
+  "version": "0.0.7",
   "description": "A webpackChunkName plugin for Vite.",
   "main": "dist/vite-plugin-webpackchunkname.js",
   "types": "dist/index.d.ts",
@@ -22,15 +22,17 @@
   ],
   "author": "CaptainLiao",
   "license": "MIT",
+  "dependencies": {
+    "es-module-lexer": "^0.10.0",
+    "magic-string": "^0.26.1",
+    "@rollup/pluginutils": "^4.2.0"
+  },
   "devDependencies": {
-    "@rollup/pluginutils": "^4.2.0",
     "@types/jest": "^27.4.1",
     "@types/node": "^17.0.21",
-    "es-module-lexer": "^0.10.0",
     "eslint": "^8.10.0",
     "jest": "^27.5.1",
     "lint-staged": "^12.3.5",
-    "magic-string": "^0.26.1",
     "prettier": "^2.5.1",
     "rollup": "^2.67.2",
     "rollup-plugin-banner2": "^1.2.2",
@@ -48,7 +50,7 @@
   },
   "gitHooks": {
     "pre-commit": "lint-staged",
-    "commit-msg": "node scripts/verifyCommit.js"
+    "commit-msg": "node script/verifyCommit.js"
   },
   "lint-staged": {
     "*.js": [

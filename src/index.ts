@@ -68,8 +68,14 @@ export const manualChunksPlugin = function (): Plugin {
         let str = new MagicString(source)
         const imports = parseImports(source)[0]
         for (let index = 0; index < imports.length; index++) {
-          const { s: start, e: end, n: rawValue } = imports[index]
-          const rawUrl = source.slice(start, end)
+          const {
+            ss: sstart,
+            se: send,
+            s: start,
+            e: end,
+            n: rawValue,
+          } = imports[index]
+          const rawUrl = source.slice(sstart, send)
           const matched = routeChunkNameRE.exec(rawUrl)
           if (matched) {
             const chunkName = matched[2].replace(/\//g, '.')
@@ -93,6 +99,10 @@ export const manualChunksPlugin = function (): Plugin {
     },
 
     config(userConfig) {
+      if (!userConfig.build) userConfig.build = {}
+      if (!userConfig.build.rollupOptions) userConfig.build.rollupOptions = {}
+      if (!userConfig.build.rollupOptions.output)
+        userConfig.build.rollupOptions.output = {}
       Object.assign(userConfig.build.rollupOptions.output, {
         manualChunks: manualChunksConfig,
       })
