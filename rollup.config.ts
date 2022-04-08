@@ -1,11 +1,5 @@
-import banner2 from 'rollup-plugin-banner2'
 import typescript from 'rollup-plugin-typescript2'
-import pkg from './package.json'
-
-// 版权信息配置
-const ResolveBanner = () => {
-  return `/**\n * name: ${pkg.name}\n * version: v${pkg.version}\n * author: ${pkg.author}\n */\n`
-}
+import { terser } from 'rollup-plugin-terser'
 
 const outputOpt = {
   format: 'cjs',
@@ -22,10 +16,5 @@ export default {
     },
   ],
   external: ['rollup', 'fs', 'path'],
-  plugins: [
-    typescript(),
-    banner2(ResolveBanner, {
-      sourcemap: true,
-    }),
-  ],
+  plugins: [terser({ format: { comments: false } }), typescript()],
 }
