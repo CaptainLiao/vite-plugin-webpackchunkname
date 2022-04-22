@@ -158,7 +158,11 @@ function getImportersChunkNames(
         }
         resSets.add(name)
       } else {
-        importers.forEach((item) => ids.push(item))
+        importers.forEach((item) => {
+          if (ids.indexOf(item) === -1) {
+            ids.push(item)
+          }
+        })
       }
     }
   }
