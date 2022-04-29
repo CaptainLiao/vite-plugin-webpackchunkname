@@ -39,6 +39,7 @@ export const manualChunksPlugin = function (): Plugin {
   const appModuleIdSets: Set<string> = new Set()
   return {
     name: 'manualNameChunksPlugin',
+    apply: 'build',
     load(id) {
       if (id.includes('node_modules')) {
         nodeModuleIdSets.add(id)
