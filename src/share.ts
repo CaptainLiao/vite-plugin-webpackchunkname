@@ -5,7 +5,7 @@ import { normalizePath } from '@rollup/pluginutils'
 const APP_ROOT_PATH = normalizePath(process.cwd())
 export const appRootPathRE = new RegExp(APP_ROOT_PATH, 'i')
 export const userJSFilePathRE = new RegExp(
-  APP_ROOT_PATH + '/(?!node_modules).*\\.[tj]s$',
+  APP_ROOT_PATH + '/(?!node_modules).*\\.[tj]s[x]?$',
   'i'
 )
 export const CHUNK_NAME_TAG = 'chunkName'
