@@ -1,6 +1,6 @@
 ## Features
 
-Use `webpackChunkName` config in `vue-router` by vite as well as `webpack` do.
+Use `webpackChunkName` config in vite project as well as `webpack` do.
 
 > ℹ️ **Only support for Vite 2.**
 
@@ -27,6 +27,11 @@ export default defineConfig({
   ]
 })
 ```
+
+then add `webpackChunkName` comments to the import:
+````js
+import(/* webpackChunkName: "detail" */ "@/detail/somepage.vue")
+````
 
 ## License
 
