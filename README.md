@@ -2,8 +2,6 @@
 
 Use `webpackChunkName` config in vite project as well as `webpack` do.
 
-> ℹ️ **Only support for Vite 2.**
-
 ## Install
 
 Install the package from npm (or yarn, or pnpm).
