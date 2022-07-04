@@ -2,7 +2,7 @@
 
 Use `webpackChunkName` config in vite project as well as `webpack` do.
 
-**Not support third party packages**[see vitejs #8824](https://github.com/vitejs/vite/pull/8824)
+**Not support third party packages**. [see vitejs #8824](https://github.com/vitejs/vite/pull/8824)
 
 ## Install
 
