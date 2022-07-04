@@ -1,6 +1,6 @@
 ## Features
 
-Use `webpackChunkName` config in vite project as well as `webpack` do.
+Use `webpackChunkName` config in vite project as well as `webpack` do.**Not support third party packages**
 
 ## Install
 
