@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-webpackchunkname",
-  "version": "0.0.13",
+  "version": "0.1.1",
   "description": "A webpackChunkName plugin for Vite.",
   "main": "dist/vite-plugin-webpackchunkname.js",
   "types": "dist/index.d.ts",
@@ -23,6 +23,7 @@
   "author": "CaptainLiao",
   "license": "MIT",
   "dependencies": {
+    "@rollup/plugin-alias": "^3.1.9",
     "@rollup/pluginutils": "^4.2.0",
     "es-module-lexer": "^0.10.0",
     "magic-string": "^0.26.1"
@@ -45,6 +46,7 @@
     "yorkie": "^2.0.0"
   },
   "peerDependencies": {
+    "@rollup/plugin-alias": "*",
     "rollup": "^2.67.2",
     "vite": "*"
   },

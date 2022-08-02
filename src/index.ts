@@ -1,7 +1,10 @@
 import type { Plugin } from 'vite'
 import type { GetModuleInfo } from 'rollup'
+import type { ResolverObject } from '@rollup/plugin-alias'
+
 import { parse as parseImports } from 'es-module-lexer'
 import MagicString from 'magic-string'
+import alias from '@rollup/plugin-alias'
 import { manualChunksConfig } from './manualChunksConfig'
 import {
   bundleName,
@@ -37,6 +40,8 @@ const getNodeModulesName = (id: string) => {
 export const manualChunksPlugin = function (): Plugin {
   const nodeModuleIdSets: Set<string> = new Set()
   const appModuleIdSets: Set<string> = new Set()
+  let _resolveIdByAlias: ResolverObject
+
   return {
     name: 'manualNameChunksPlugin',
     apply: 'build',
@@ -62,7 +67,7 @@ export const manualChunksPlugin = function (): Plugin {
       appModuleIdChunkNamesMap.set(appModuleIdMap)
     },
 
-    transform(source, id) {
+    async transform(source, id) {
       const hasConfigRouteChunkName =
         userJSFilePathRE.test(id) && routeChunkNameRE.test(source)
       if (hasConfigRouteChunkName) {
@@ -89,7 +94,17 @@ export const manualChunksPlugin = function (): Plugin {
               )
               return process.exit()
             }
-            const newContent = `"${rawValue}?${CHUNK_NAME_TAG}=${chunkName}"`
+
+            let resolvedId = rawValue
+            if (_resolveIdByAlias) {
+              const rid = await _resolveIdByAlias.resolveId.call(
+                this,
+                rawValue,
+                id
+              )
+              if (rid) resolvedId = rid.id
+            }
+            const newContent = `"${resolvedId}?${CHUNK_NAME_TAG}=${chunkName}"`
             str = str.overwrite(start, end, newContent)
           }
         }
@@ -117,6 +132,10 @@ export const manualChunksPlugin = function (): Plugin {
           manualChunks: manualChunksConfig,
         })
       }
+
+      const userAlias = userConfig.resolve.alias as any
+      if (userAlias)
+        _resolveIdByAlias = alias({ entries: userAlias }) as ResolverObject
     },
   }
 }
