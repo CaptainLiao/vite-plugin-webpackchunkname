@@ -1,5 +1,9 @@
 import type { Plugin } from 'vite'
-import type { GetManualChunkApi, GetModuleInfo } from 'rollup'
+import type {
+  GetManualChunkApi,
+  GetModuleInfo,
+  ManualChunksOption,
+} from 'rollup'
 import type { ResolverObject } from '@rollup/plugin-alias'
 
 import { parse as parseImports } from 'es-module-lexer'
@@ -17,6 +21,7 @@ import {
   getFileName,
 } from './share'
 import { moduleImpoterMap } from './type.d'
+import { GetManualChunk } from 'rollup'
 
 const routeChunkNameRE = /(webpackC|c)hunkName:\s*["']([\w-/.]+)["']/
 const fileNameRE = /^[\w-.]+[\w]$/
@@ -140,7 +145,9 @@ export const manualChunksPlugin = function (): Plugin {
   }
 }
 
-export function getManualChunks(initialManualChunks: any) {
+export function getManualChunks(
+  initialManualChunks: ManualChunksOption
+): GetManualChunk {
   const userDefinedManualChunks =
     typeof initialManualChunks === 'function' ? initialManualChunks : undefined
   return (id: string, opts: GetManualChunkApi) => {
