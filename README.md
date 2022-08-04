@@ -33,6 +33,21 @@ then add `webpackChunkName` comments to the import:
 import(/* webpackChunkName: "detail" */ "@/detail/somepage.vue")
 ````
 
+### Support for user defined manual chunks
+
+Since this plugin extends and overrides the usage of `build.output.manualChunks`.  The way to apply your own manual chunks must be done using the callback (rather than the string array) in a way similar to the example below:
+
+```
+ /* build.output.manualChunks */
+    manualChunks: (
+      id: string
+    ) => {
+      if (id.indexOf("node_modules/lodash/") !== -1) {
+        return "lodash";
+      }
+    },
+```
+
 ## License
 
 Copyright [CaptainLiao](https://github.com/CaptainLiao)

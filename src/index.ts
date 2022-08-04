@@ -1,5 +1,5 @@
 import type { Plugin } from 'vite'
-import type { GetModuleInfo } from 'rollup'
+import type { GetManualChunkApi, GetModuleInfo } from 'rollup'
 import type { ResolverObject } from '@rollup/plugin-alias'
 
 import { parse as parseImports } from 'es-module-lexer'
@@ -124,12 +124,12 @@ export const manualChunksPlugin = function (): Plugin {
       const output = rollupOptions.output
       if (Array.isArray(output)) {
         rollupOptions.output = output.map((item) => {
-          item.manualChunks = manualChunksConfig
+          item.manualChunks = getManualChunks(item.manualChunks)
           return item
         })
       } else {
         Object.assign(userConfig.build.rollupOptions.output, {
-          manualChunks: manualChunksConfig,
+          manualChunks: getManualChunks(output.manualChunks),
         })
       }
 
@@ -137,6 +137,20 @@ export const manualChunksPlugin = function (): Plugin {
       if (userAlias)
         _resolveIdByAlias = alias({ entries: userAlias }) as ResolverObject
     },
+  }
+}
+
+export function getManualChunks(initialManualChunks: any) {
+  const userDefinedManualChunks =
+    typeof initialManualChunks === 'function' ? initialManualChunks : undefined
+  return (id: string, opts: GetManualChunkApi) => {
+    if (userDefinedManualChunks) {
+      const result = userDefinedManualChunks(id, opts)
+      if (result) {
+        return result
+      }
+    }
+    return manualChunksConfig(id, opts)
   }
 }
 
