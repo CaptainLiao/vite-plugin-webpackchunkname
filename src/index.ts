@@ -9,7 +9,7 @@ import type { ResolverObject } from '@rollup/plugin-alias'
 import { parse as parseImports } from 'es-module-lexer'
 import MagicString from 'magic-string'
 import alias from '@rollup/plugin-alias'
-import { manualChunksConfig } from './manualChunksConfig'
+import { getManualChunks, manualChunksConfig } from './manualChunksConfig'
 import {
   bundleName,
   CHUNK_NAME_TAG,
@@ -142,22 +142,6 @@ export const manualChunksPlugin = function (): Plugin {
       if (userAlias)
         _resolveIdByAlias = alias({ entries: userAlias }) as ResolverObject
     },
-  }
-}
-
-export function getManualChunks(
-  initialManualChunks: ManualChunksOption
-): GetManualChunk {
-  const userDefinedManualChunks =
-    typeof initialManualChunks === 'function' ? initialManualChunks : undefined
-  return (id: string, opts: GetManualChunkApi) => {
-    if (userDefinedManualChunks) {
-      const result = userDefinedManualChunks(id, opts)
-      if (result) {
-        return result
-      }
-    }
-    return manualChunksConfig(id, opts)
   }
 }
 

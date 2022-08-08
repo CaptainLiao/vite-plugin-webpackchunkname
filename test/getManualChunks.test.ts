@@ -1,15 +1,16 @@
-import { getManualChunks } from '../src/index'
+import { getManualChunks } from '../src/utils'
 import * as manualChunksConfig from '../src/manualChunksConfig'
 
 const mockManualChunksConfig = jest.spyOn(
   manualChunksConfig,
   'manualChunksConfig'
 )
-mockManualChunksConfig.mockReturnValue('some value')
+mockManualChunksConfig.mockReturnValue('bar-yeah')
 
 describe('getManualChunks', () => {
   test('function is called', () => {
     const userDefinedFunc = jest.fn()
+    userDefinedFunc.mockReturnValue('foo-yeah')
     const manualChunks = getManualChunks(userDefinedFunc)
     manualChunks('foo', {} as any)
     expect(userDefinedFunc).toBeCalled()
