@@ -1,15 +1,11 @@
 import type { Plugin } from 'vite'
-import type {
-  GetManualChunkApi,
-  GetModuleInfo,
-  ManualChunksOption,
-} from 'rollup'
+import type { GetModuleInfo } from 'rollup'
 import type { ResolverObject } from '@rollup/plugin-alias'
 
 import { parse as parseImports } from 'es-module-lexer'
 import MagicString from 'magic-string'
 import alias from '@rollup/plugin-alias'
-import { getManualChunks, manualChunksConfig } from './manualChunksConfig'
+import { manualChunksConfig } from './manualChunksConfig'
 import {
   bundleName,
   CHUNK_NAME_TAG,
@@ -21,7 +17,6 @@ import {
   getFileName,
 } from './share'
 import { moduleImpoterMap } from './type.d'
-import { GetManualChunk } from 'rollup'
 
 const routeChunkNameRE = /(webpackC|c)hunkName:\s*["']([\w-/.]+)["']/
 const fileNameRE = /^[\w-.]+[\w]$/
@@ -129,12 +124,12 @@ export const manualChunksPlugin = function (): Plugin {
       const output = rollupOptions.output
       if (Array.isArray(output)) {
         rollupOptions.output = output.map((item) => {
-          item.manualChunks = getManualChunks(item.manualChunks)
+          item.manualChunks = manualChunksConfig
           return item
         })
       } else {
         Object.assign(userConfig.build.rollupOptions.output, {
-          manualChunks: getManualChunks(output.manualChunks),
+          manualChunks: manualChunksConfig,
         })
       }
 
