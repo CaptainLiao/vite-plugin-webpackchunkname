@@ -46,9 +46,13 @@
     "yorkie": "^2.0.0"
   },
   "peerDependencies": {
-    "@rollup/plugin-alias": "*",
     "rollup": "^2.67.2",
     "vite": "*"
+  },
+  "peerDependenciesMeta": {
+    "rollup": {
+      "optional": true
+    }
   },
   "gitHooks": {
     "pre-commit": "lint-staged",
