@@ -1,5 +1,6 @@
 import typescript from 'rollup-plugin-typescript2'
 import { terser } from 'rollup-plugin-terser'
+import externals from 'rollup-plugin-node-externals'
 
 const outputOpt = {
   format: 'cjs',
@@ -15,6 +16,5 @@ export default {
       ...outputOpt,
     },
   ],
-  external: ['rollup', 'fs', 'path'],
-  plugins: [terser({ format: { comments: false } }), typescript()],
+  plugins: [externals(), terser({ format: { comments: false } }), typescript()],
 }
