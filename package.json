@@ -20,6 +20,9 @@
     "rollup webpackChunkName",
     "manualChunks"
   ],
+  "files": [
+    "dist"
+  ],
   "author": "CaptainLiao",
   "license": "MIT",
   "dependencies": {
