@@ -137,7 +137,7 @@ export const manualChunksPlugin = function (): Plugin {
         })
       }
 
-      const userAlias = userConfig.resolve.alias as any
+      const userAlias = userConfig.resolve && (userConfig.resolve.alias as any)
       if (userAlias)
         _resolveIdByAlias = alias({ entries: userAlias }) as ResolverObject
     },
