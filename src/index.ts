@@ -19,7 +19,6 @@ import {
 import { moduleImpoterMap } from './type.d'
 
 const routeChunkNameRE = /(webpackC|c)hunkName:\s*["']([\w-/.]+)["']/
-const fileNameRE = /^[\w-.]+[\w]$/
 const nodeModuleRE = /node_modules\/((@[^/]+\/)?[^/]+)/g
 const getNodeModulesName = (id: string) => {
   let name = ''
@@ -85,15 +84,6 @@ export const manualChunksPlugin = function (): Plugin {
           const matched = routeChunkNameRE.exec(rawUrl)
           if (matched) {
             const chunkName = matched[2].replace(/\//g, '.')
-            if (!fileNameRE.test(chunkName)) {
-              console.error(
-                '错误的 chunkName 命名->',
-                matched[2],
-                '. in id = ',
-                id
-              )
-              return process.exit()
-            }
 
             let resolvedId = rawValue
             if (_resolveIdByAlias) {
