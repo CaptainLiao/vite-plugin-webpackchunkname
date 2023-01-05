@@ -1,4 +1,4 @@
-import type { Plugin } from 'vite'
+import type { Plugin, ResolvedConfig } from 'vite'
 import type { GetModuleInfo, ManualChunksOption } from 'rollup'
 import type { ResolverObject } from '@rollup/plugin-alias'
 
@@ -40,6 +40,7 @@ export const manualChunksPlugin = function (): Plugin {
   const nodeModuleIdSets: Set<string> = new Set()
   const appModuleIdSets: Set<string> = new Set()
   let _resolveIdByAlias: ResolverObject
+  let _config: ResolvedConfig
 
   return {
     name: 'manualNameChunksPlugin',
@@ -51,6 +52,10 @@ export const manualChunksPlugin = function (): Plugin {
         appModuleIdSets.add(id)
       }
       return null
+    },
+
+    configResolved(resolvedConfig) {
+      _config = resolvedConfig
     },
 
     buildEnd() {
@@ -100,6 +105,12 @@ export const manualChunksPlugin = function (): Plugin {
         }
         return {
           code: str.toString(),
+          map: _config.build.sourcemap
+            ? str.generateMap({
+                includeContent: true,
+                hires: true,
+              })
+            : null,
         }
       }
     },
