@@ -33,6 +33,20 @@ then add `webpackChunkName` comments to the import:
 import(/* webpackChunkName: "detail" */ "@/detail/somepage.vue")
 ````
 
+### use unplugin-vue-components
+must add `include` params. see(https://github.com/CaptainLiao/vite-plugin-webpackchunkname/issues/18) eg:
+````js
+import Components from 'unplugin-vue-components/vite';
+...
+  plugins: [
+    Components({
+      resolvers: [VantResolver()],
+      include: [/\.vue$/, /\.vue\?/]
+    }),
+  ],
+...
+````
+
 ### Support for user defined manual chunks
 
 Since this plugin extends and overrides the usage of `build.output.manualChunks`.  The way to apply your own manual chunks must be done using the callback (rather than the string array) in a way similar to the example below:
