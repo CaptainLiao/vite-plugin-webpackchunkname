@@ -36,7 +36,7 @@ import(/* webpackChunkName: "detail" */ "@/detail/somepage.vue")
 ## Advance usage
 
 ### Use unplugin-vue-components
-must add `include` params. see(https://github.com/CaptainLiao/vite-plugin-webpackchunkname/issues/18) eg:
+must add `include` option. see(https://github.com/CaptainLiao/vite-plugin-webpackchunkname/issues/18) eg:
 ````js
 import Components from 'unplugin-vue-components/vite';
 ...
