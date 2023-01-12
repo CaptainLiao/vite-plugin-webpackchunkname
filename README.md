@@ -40,7 +40,7 @@ import Components from 'unplugin-vue-components/vite';
 ...
   plugins: [
     Components({
-      resolvers: [VantResolver()],
+      // other params
       include: [/\.vue$/, /\.vue\?/]
     }),
   ],
