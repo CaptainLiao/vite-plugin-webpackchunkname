@@ -33,7 +33,7 @@ then add `webpackChunkName` comments to the import:
 import(/* webpackChunkName: "detail" */ "@/detail/somepage.vue")
 ````
 
-### use unplugin-vue-components
+### Use unplugin-vue-components
 must add `include` params. see(https://github.com/CaptainLiao/vite-plugin-webpackchunkname/issues/18) eg:
 ````js
 import Components from 'unplugin-vue-components/vite';
