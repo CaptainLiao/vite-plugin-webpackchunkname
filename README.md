@@ -12,7 +12,7 @@ Install the package from npm (or yarn, or pnpm).
 npm install --save-dev vite-plugin-webpackchunkname
 ```
 
-### Basic usage
+### * Basic usage
 
 Add it to `vite.config.ts`
 
@@ -33,9 +33,7 @@ then add `webpackChunkName` comments to the import:
 import(/* webpackChunkName: "detail" */ "@/detail/somepage.vue")
 ````
 
-## Advance usage
-
-### Use unplugin-vue-components
+### * Use unplugin-vue-components
 must add `include` option. see(https://github.com/CaptainLiao/vite-plugin-webpackchunkname/issues/18) eg:
 ````js
 import Components from 'unplugin-vue-components/vite';
@@ -49,7 +47,7 @@ import Components from 'unplugin-vue-components/vite';
 ...
 ````
 
-### Support for user defined manual chunks
+### * Support for user defined manual chunks
 
 Since this plugin extends and overrides the usage of `build.output.manualChunks`.  The way to apply your own manual chunks must be done using the callback (rather than the string array) in a way similar to the example below:
 
