@@ -235,7 +235,7 @@ function nodeModuleId2issuerMap(
       ;[...depMaps[id].chunkNames].forEach((mid) =>
         depMaps[importedId].chunkNames.add(mid)
       )
-      getModuleInfo(importedId).importedIds.forEach((mid: string) =>
+      ((getModuleInfo(importedId) || {}).importedIds || []).forEach((mid: string) =>
         depSets.add(mid)
       )
     }
