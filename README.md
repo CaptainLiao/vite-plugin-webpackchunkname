@@ -49,10 +49,10 @@ import Components from 'unplugin-vue-components/vite';
 
 ### *Support for user defined manual chunks*
 
-Since this plugin extends and overrides the usage of `build.output.manualChunks`.  The way to apply your own manual chunks must be done using the callback (rather than the string array) in a way similar to the example below:
+Since this plugin extends and overrides the usage of `build.rollupOptions.output.manualChunks`.  The way to apply your own manual chunks must be done using the callback (rather than the string array) in a way similar to the example below:
 
 ```
- /* build.output.manualChunks */
+ /* build.rollupOptions.output.manualChunks */
     manualChunks: (
       id: string
     ) => {
