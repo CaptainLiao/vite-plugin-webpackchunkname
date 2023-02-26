@@ -1,3 +1,5 @@
+✨✨✨ Star the plugin if it useful for u.
+
 ## Features
 
 Use `webpackChunkName` config in vite project as well as `webpack` do.
