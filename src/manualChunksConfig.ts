@@ -62,18 +62,14 @@ export function manualChunksConfig(
   // 处理node_modules中的依赖
   if (nodeModuleInfo) {
     const rootModule = [...nodeModuleInfo.chunkNames]
-    let chunkName = bundleName.main
-    switch (rootModule.length) {
-      case 1:
-        chunkName = rootModule[0]
-        break
-      default:
-        break
+    let chunkName = rootModule[0]
+    if (rootModule.length >= 2) {
+      chunkName = nodeModuleInfo.name
     }
     if (__moduleInVenderMap.has(chunkName)) {
       chunkName = bundleName.vendor
     }
-    return chunkName
+    return chunkName || bundleName.main
   }
 
   const appModuleInfo = appModuleIdChunkNamesMap.get(id)
