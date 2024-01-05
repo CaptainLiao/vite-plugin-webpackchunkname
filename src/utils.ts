@@ -1,4 +1,4 @@
-import { GetManualChunk, GetManualChunkApi, ManualChunksOption } from 'rollup'
+import { GetManualChunk, ManualChunksOption } from 'rollup'
 import { manualChunksConfig } from './manualChunksConfig'
 
 /**
@@ -11,7 +11,7 @@ export function getManualChunks(
 ): GetManualChunk {
   const userDefinedManualChunks =
     typeof initialManualChunks === 'function' ? initialManualChunks : undefined
-  return (id: string, opts: GetManualChunkApi) => {
+  return (id: string, opts) => {
     if (userDefinedManualChunks) {
       const result = userDefinedManualChunks(id, opts)
       if (result) {
