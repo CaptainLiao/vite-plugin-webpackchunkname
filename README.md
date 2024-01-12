@@ -1,7 +1,7 @@
 ## Update
-ES Moudule: use 1.0.0
+@1.0.0 for node 16+
 
-CommonJS: use 0.2.4
+@0.2.4 for node 16-
 
 ## Features
 
