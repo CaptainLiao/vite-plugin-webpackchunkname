@@ -1,3 +1,7 @@
+## Update
+ES Moudule: use 1.0.0
+
+CommonJS: use 0.2.4
 
 ## Features
 
