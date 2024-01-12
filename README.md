@@ -1,7 +1,7 @@
 ## Update
-@1.0.0 for node 16+
+@1.0.0 for vite5.
 
-@0.2.4 for node 16-
+@0.2.4 for vite4 or lower.
 
 ## Features
 
