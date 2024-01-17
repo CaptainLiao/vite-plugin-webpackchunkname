@@ -1,11 +1,15 @@
 {
   "name": "vite-plugin-webpackchunkname",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A webpackChunkName plugin for Vite.",
   "main": "dist/vite-plugin-webpackchunkname.js",
+  "module": "dist/vite-plugin-webpackchunkname.mjs",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "rollup -c rollup.config.js",
+    "build": "rollup -c rollup.config.js --bundleConfigAsCjs",
     "test": "jest --no-cache --detectOpenHandles",
     "lint": "eslint src --ext .js,.ts",
     "format": "prettier --write ."
@@ -20,7 +24,6 @@
     "rollup webpackChunkName",
     "manualChunks"
   ],
-  "type": "module",
   "author": "CaptainLiao",
   "license": "MIT",
   "dependencies": {
@@ -48,7 +51,7 @@
   },
   "gitHooks": {
     "pre-commit": "lint-staged",
-    "commit-msg": "node script/verifyCommit.js"
+    "commit-msg": "node script/verifyCommit.mjs"
   },
   "lint-staged": {
     "*.js": [

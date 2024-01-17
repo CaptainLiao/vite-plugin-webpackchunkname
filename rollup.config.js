@@ -14,6 +14,11 @@ export default {
       file: `dist/vite-plugin-webpackchunkname.js`,
       ...outputOpt,
     },
+    {
+      file: `dist/vite-plugin-webpackchunkname.mjs`,
+      ...outputOpt,
+      format: 'esm',
+    },
   ],
   external: ['rollup', 'fs', 'path'],
   plugins: [terser({ format: { comments: false } }), typescript()],
