@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-webpackchunkname",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A webpackChunkName plugin for Vite.",
   "main": "dist/vite-plugin-webpackchunkname.js",
   "module": "dist/vite-plugin-webpackchunkname.mjs",
@@ -60,5 +60,9 @@
     "*.ts?(x)": [
       "prettier --parser=typescript --write"
     ]
+  },
+  "volta": {
+    "node": "16.12.0",
+    "yarn": "1.22.22"
   }
 }
