@@ -15,6 +15,7 @@ import {
   userJSFilePathRE,
   appModuleIdChunkNamesMap,
   getFileName,
+  fileNameDelimiter,
 } from './share'
 import { moduleImpoterMap } from './type.d'
 
@@ -88,7 +89,7 @@ export const manualChunksPlugin = function (): Plugin {
           const rawUrl = source.slice(sstart, send)
           const matched = routeChunkNameRE.exec(rawUrl)
           if (matched) {
-            const chunkName = matched[2].replace(/\//g, '.')
+            const chunkName = matched[2].replace(/\//g, fileNameDelimiter)
 
             let resolvedId = rawValue
             if (_resolveIdByAlias) {

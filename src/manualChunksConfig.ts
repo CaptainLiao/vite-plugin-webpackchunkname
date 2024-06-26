@@ -5,7 +5,10 @@ import {
   appRootPathRE,
   moduleDeps,
   appModuleIdChunkNamesMap,
+  fileNameDelimiter,
 } from './share'
+
+const fileNameDelimiterRegExp = new RegExp(fileNameDelimiter, 'g')
 
 const cssLangs = `\\.(css|less|sass|scss|styl|stylus|pcss|postcss)($|\\?)`
 const cssLangRE = new RegExp(cssLangs)
@@ -102,7 +105,7 @@ function assembleChunkName(names: string[]) {
 }
 
 function formatChunkName(name: string) {
-  return name.replace(/\./g, '/')
+  return name.replace(fileNameDelimiterRegExp, '/')
 }
 
 function staticImportedByEntry(

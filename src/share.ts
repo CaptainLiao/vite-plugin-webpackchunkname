@@ -14,6 +14,7 @@ export const bundleName = {
   main: 'common',
   vendor: 'vendor',
 }
+export const fileNameDelimiter = '~'
 
 export const getFileName = (filePath: string) => {
   return basename(filePath, extname(filePath))
